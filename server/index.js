@@ -26,14 +26,13 @@ app.post("/send", (req, res) => {
 //TODO: get a signature from the client-side application
 //recover the public address from the signature
 
-// const { sender, recipient, amount } = req.body;
   const { sign, recipient, amount } = req.body;
-  console.log('the response:::', req.body)
-  console.log('The siiiggnnn:::::::', sign)
-
-  console.log('message:::', hashData("hello world"))
   
-  const sender =  secp.recoverPublicKey(hashData("hello world"), sign[0], sign[1]);
+  const sender =  secp.recoverPublicKey(
+    hashData(`${parseInt(sendAmount)} ${recipient}`), 
+    sign[0], //signature
+    sign[1] //recoveryBit
+  );
 
   setInitialBalance(sender);
   setInitialBalance(recipient);

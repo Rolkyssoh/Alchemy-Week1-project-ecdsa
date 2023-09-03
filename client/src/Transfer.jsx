@@ -18,17 +18,8 @@ function Transfer({ address, setBalance,privateKey }) {
 
   async function transfer(evt) {
     evt.preventDefault();
-    const hash = hashData("hello world");
+    const hash = hashData(`${parseInt(sendAmount)} ${recipient}`);
     const sign = await secp.sign(hash, privateKey, {recovered: true, der: false});
-    console.log('hashhh:::', hash)
-    console.log('the signed:::', sign)
-    console.log('the private Key:::', privateKey)
-    const signature = sign[0];
-    const recoveryBit = sign[1]
-
-
-    console.log('siiiiign:::', signature)
-    console.log('recovvvv:::', recoveryBit)
 
      try {
        const {
